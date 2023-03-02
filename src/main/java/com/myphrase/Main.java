@@ -1,5 +1,8 @@
 package com.myphrase;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +14,8 @@ public class Main {
 class App {
     static void run() {
         Scanner sc = new Scanner(System.in);
+        List<Phrase> phraseList = new ArrayList<>();
+
         int id = 1;
 
         // 명언 앱 시작
@@ -19,17 +24,27 @@ class App {
             System.out.print("명령) ");
             String cmd = sc.next(); // 명령 입력
 
-            if (cmd.equals("등록")) {
+            if (cmd.trim().equals("등록")) {
                 System.out.print("명언 : ");
                 String phrase = sc.next();
                 System.out.print("작가 : ");
                 String writer = sc.next();
 
-                System.out.printf("%d번 명령이 등록되었습니다.\n", id++);
+                phraseList.add(new Phrase(id, writer, phrase)); // 명언목록에 저장
 
-            } else if (cmd.equals("종료")) {
+                System.out.printf("%d번 명령이 등록되었습니다.\n", id++);
+            } else if (cmd.trim().equals("목록")) {
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("---------------------");
+
+                Collections.reverse(phraseList);
+                for (Phrase p : phraseList) {
+                    System.out.printf("%d / %s / %s\n", p.getId(), p.getWriter(), p.getPhrase());
+                }
+            } else if (cmd.trim().equals("종료")) {
                 break;
             }
         }
     }
 }
+
