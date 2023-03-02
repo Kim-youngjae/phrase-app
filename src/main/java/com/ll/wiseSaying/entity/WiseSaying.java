@@ -1,17 +1,17 @@
-package com.myphrase;
+package com.ll.wiseSaying.entity;
 
-class Phrase {
-    private int id;
+public class WiseSaying {
+    private long id;
     private String writer;
     private String phrase;
 
-    public Phrase(int id, String writer, String phrase) {
+    public WiseSaying(long id, String writer, String phrase) {
         this.id = id;
         this.writer = writer;
         this.phrase = phrase;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
