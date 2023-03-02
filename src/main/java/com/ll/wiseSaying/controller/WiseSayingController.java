@@ -64,4 +64,31 @@ public class WiseSayingController {
         }
         return null; // 없으면 null 반환
     }
+
+    public void update(Rq rq) {
+        int id = rq.getIntParam("id", -1); // rq로 부터 명령 옵션을 분리하고 id값 추출
+
+        if (id == -1) { // id값이 없으면
+            System.out.println("id(정수)값을 입력하세요");
+            return;
+        }
+
+        WiseSaying wiseSaying = findById(id); // id랑 일치하는 명언 객체를 반환
+
+        if (wiseSaying == null) { // 없을 때 처리
+            System.out.printf("%d번 명언은 존재하지 않습니다.", id);
+            return;
+        }
+
+        System.out.printf("명언(기존) : %s\n", wiseSaying.getPhrase()); // 해당 id의 기존 명언을 출력
+        System.out.print("명언 : ");
+        String phrase = Container.getScanner().nextLine();
+        wiseSaying.setPhrase(phrase); // 입력받은 명언을 해당 id 객체에 저장
+
+        System.out.printf("작가(기존) : %s\n", wiseSaying.getWriter()); // 해당 id의 기존 작가를 출력
+        System.out.print("작가 : ");
+        String writer = Container.getScanner().nextLine();
+        wiseSaying.setWriter(writer); // 입력받은 작가를 해당 id 객체에 저장
+
+    }
 }
